@@ -4,7 +4,6 @@ tags
 app/pixate_code.rb
 resources/*.nib
 resources/*.momd
-resources/*.storyboardc
 .DS_Store
 nbproject
 .redcar
@@ -15,3 +14,7 @@ nbproject
 .sass-cache
 .idea
 .dat*.*
+
+# interface builder files
+ib.xcodeproj
+resources/*.storyboardc
