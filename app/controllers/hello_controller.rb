@@ -1,16 +1,16 @@
 class HelloController < UIViewController
-  # extend IB
+  extend IB
 
-  # attr_accessor :data_source
+  attr_accessor :data_source
 
-  # ## ib outlets
-  # outlet :scroller, UIScrollView
-  # outlet :btn_hello
+  outlet :btn_hello
 
-
-  # def say_hello(sender)
-  #   alert = UIAlertView.new
-  #   alert.message = "Hello World!"
-  #   alert.show
-  # end
+  def say_hello(sender)
+    alert = UIAlertView.alloc.initWithTitle('Greeting',
+      message: 'Hello World!',
+      delegate: nil,
+      cancelButtonTitle: "OK",
+      otherButtonTitles: nil)
+    alert.show
+  end
 end
