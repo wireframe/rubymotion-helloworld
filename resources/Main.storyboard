@@ -43,6 +43,7 @@
                     </view>
                     <connections>
                         <outlet property="btn_hello" destination="pCI-Ut-OdX" id="9Ff-RL-LRw"/>
+                        <outlet property="label_text" destination="GSf-Ku-Uc6" id="Fjg-rV-UMy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="upU-CE-Wmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
