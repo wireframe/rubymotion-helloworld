@@ -7,7 +7,6 @@ Bundler.require
 
 require 'sugarcube-all'
 require 'bubble-wrap/all'
-require 'bubble-wrap-http'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.

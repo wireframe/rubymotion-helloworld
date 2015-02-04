@@ -11,10 +11,10 @@ class LoginController < UIViewController
       username: text_email.text,
       password: text_password.text
     }
-    BubbleWrap::HTTP.post('http://betterup.local/oauth/token', payload: params) do |response|
+    AFMotion::JSON.post('http://betterup.local/oauth/token', params) do |response|
       p response.body.to_str
-      if response.ok?
-        json = BW::JSON.parse(response.body.to_str)
+      if response.success?
+        json = response.object
         access_token = json['access_token']
         refresh_token = json['refresh_token']
         App.alert('Success!')
