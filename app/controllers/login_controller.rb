@@ -6,11 +6,21 @@ class LoginController < UIViewController
   outlet :text_password
 
   def do_login
-    alert = UIAlertView.alloc.initWithTitle('Greeting',
-      message: 'Hello World!',
-      delegate: nil,
-      cancelButtonTitle: "OK",
-      otherButtonTitles: nil)
-    alert.show
+    params = {
+      grant_type: 'password',
+      username: text_email.text,
+      password: text_password.text
+    }
+    BubbleWrap::HTTP.post('http://betterup.local/oauth/token', payload: params) do |response|
+      p response.body.to_str
+      if response.ok?
+        json = BW::JSON.parse(response.body.to_str)
+        access_token = json['access_token']
+        refresh_token = json['refresh_token']
+        App.alert('Success!')
+      else
+        App.alert('Login failed')
+      end
+    end
   end
 end
