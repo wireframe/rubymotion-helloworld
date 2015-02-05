@@ -5,22 +5,29 @@ class LoginController < UIViewController
   outlet :text_email
   outlet :text_password
 
-  def do_login
-    params = {
-      grant_type: 'password',
-      username: text_email.text,
-      password: text_password.text
-    }
-    AFMotion::JSON.post('http://betterup.local/oauth/token', params) do |response|
-      p response.body.to_str
-      if response.success?
-        json = response.object
-        access_token = json['access_token']
-        refresh_token = json['refresh_token']
-        App.alert('Success!')
-      else
-        App.alert('Login failed')
-      end
+  def viewDidLoad
+    super
+
+    App.notification_center.observe(NXOAuth2AccountStoreAccountsDidChangeNotification, NXOAuth2AccountStore.sharedStore) do |notification|
+      p notification
+      account = notification.userInfo[NXOAuth2AccountStoreNewAccountUserInfoKey]
+      p account
+      token = account.accessToken
+      p token.accessToken
+      p token.refreshToken
+      App.alert('Success!')
     end
+    App.notification_center.observe(NXOAuth2AccountStoreDidFailToRequestAccessNotification, NXOAuth2AccountStore.sharedStore) do |notification|
+      p notification
+      error = notification.userInfo[NXOAuth2AccountStoreErrorKey]
+      p error
+      App.alert('Login failed.')
+    end
+  end
+
+  def do_login
+    NXOAuth2AccountStore.sharedStore.requestAccessToAccountWithType('betterup',
+                                                                    username: text_email.text,
+                                                                    password: text_password.text)
   end
 end
