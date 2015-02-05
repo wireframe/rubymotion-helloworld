@@ -11,4 +11,8 @@ require 'bubble-wrap/all'
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'rubymotion_helloworld'
+
+  app.pods do
+    pod 'NXOAuth2Client'
+  end
 end
